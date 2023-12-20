@@ -15,18 +15,37 @@
 
     <style>
       :root {
-        --foreground-color: #d8dee9;
-        --primary-background-color: #2e3440;
-        --secondary-background-color: #3b4252;
-        --accent-color: #88c0d0;
-        --header-footer-color: #4c566a;
-        --primary-text-color: #eceff4;
-        --alt-text-color: #616e88;
+        --color-nord-polar-night-1: #2e3440;
+        --color-nord-polar-night-2: #3b4252;
+        --color-nord-polar-night-3: #4c566a;
+
+        --color-nord-snow-storm-1: #eceff4;
+        --color-nord-snow-storm-2: #e5e9f0;
+        --color-nord-snow-storm-3: #d8dee9;
+
+        --color-nord-frost-1: #8fbcbb;
+        --color-nord-frost-2: #88c0d0;
+        --color-nord-frost-3: #81a1c1;
+        --color-nord-frost-4: #5e81ac;
+
+        --color-nord-aurora-red: #bf616a;
+        --color-nord-aurora-orange: #d08770;
+        --color-nord-aurora-yellow: #ebcb8b;
+        --color-nord-aurora-green: #a3be8c;
+        --color-nord-aurora-purple: #b48ead;
+
+        --color-fg-1: var(--color-nord-snow-storm-1);
+        --color-fg-2: var(--color-nord-snow-storm-2);
+        --color-fg-3: var(--color-nord-snow-storm-3);
+
+        --color-bg-1: var(--color-nord-polar-night-1);
+        --color-bg-2: var(--color-nord-polar-night-2);
+        --color-bg-3: var(--color-nord-polar-night-3);
       }
 
       body {
-        background-color: var(--primary-background-color);
-        color: var(--foreground-color);
+        background-color: var(--color-bg-1);
+        color: var(--color-fg-3);
         max-width: 780px;
         margin: 0 auto;
         font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono",
@@ -35,11 +54,11 @@
       }
 
       h1 {
-        color: var(--accent-color);
+        color: var(--color-nord-frost-2);
       }
 
       mark {
-        color: var(--alt-text-color);
+        color: var(--color-bg-3);
         background-color: inherit;
       }
 
@@ -47,39 +66,46 @@
         font-size: 1em;
         width: 100%;
         padding: 1ch;
-        border: 1px solid var(--accent-color);
-        background-color: var(--foreground-color);
-        color: var(--primary-background-color);
+        background-color: var(--color-fg-3);
+        outline: none;
+        color: var(--color-bg-3);
+      }
+
+      input[type="text"]:focus {
+        color: var(--color-bg-1);
+        background-color: var(--color-fg-1);
+        outline: 2px solid var(--color-nord-aurora-purple);
       }
 
       button {
-        background-color: var(--accent-color);
-        color: var(--primary-background-color);
+        background-color: var(--color-nord-aurora-purple);
         padding: 1ch 5ch;
         border: none;
         cursor: pointer;
       }
 
       button:hover {
-        background-color: var(--secondary-background-color);
-        color: var(--primary-text-color);
+        background-color: var(--color-nord-aurora-red);
+      }
+
+      small {
+        font-size: 0.8em;
       }
 
       li {
         display: flex;
         justify-content: space-between;
-				align-items: flex-end;
+        align-items: flex-end;
         padding: 1ch;
         gap: 2ch;
-        color: var(--primary-text-color);
-      }
-
-      li:nth-child(odd) {
-        background-color: var(--primary-background-color);
       }
 
       li:nth-child(even) {
-        background-color: var(--secondary-background-color);
+        background-color: var(--color-bg-3);
+      }
+
+      li:nth-child(even) {
+        background-color: var(--color-bg-2);
       }
     </style>
 
