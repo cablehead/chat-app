@@ -18,4 +18,4 @@ if [[ "$P" == "/" && "$METHOD" == "GET" ]]; then
 fi
 
 meta_out status=404 headers="$(jo "content-type"="text/html")"
-echo "404 Not Found"
+echo "Not Found:" $METHOD $P
