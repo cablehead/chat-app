@@ -33,7 +33,7 @@ if [[ "$METHOD" == "POST" && "$P" == "/message" ]]; then
         port: $meta.remote_port,
         message,
     }' >>"$STORE"/messages.json
-    cat html/input.html
+    echo OK
     exit
 fi
 

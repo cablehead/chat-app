@@ -92,8 +92,13 @@
         font-size: 0.8em;
       }
 
+      pre.hoverable {
+        box-shadow: 0 0 1ch var(--color-nord-frost-2);
+        transition: 0.3s ease;
+      }
+
       pre.hoverable:hover {
-        box-shadow: 0 0 1ch var(--color-fg-3);
+        box-shadow: 0 0 1ch var(--color-nord-aurora-purple);
         transition: 0.3s ease;
       }
 
@@ -152,11 +157,10 @@
         <pre
           class="hoverable"
           style="
-            font-size: 0.8em;
+            font-size: 0.9em;
             padding: 3ch;
-            border: 1px solid var(--color-bg-3);
+            border: 2px solid var(--color-bg-3);
             border-radius: 1ch;
-            line-height: 1.3;
             cursor: pointer;
           "
           onclick="window.open('https://github.com/cablehead/the-chat-app/blob/main/root.sh#L23-L26', '_blank')"
@@ -169,12 +173,37 @@
 
       <div style="margin: 40px 0px; display: flex">
         <form
+          style="display: flex; flex-grow: 1"
           hx-post="/message"
           hx-ext="json-enc"
           hx-trigger="submit[this.querySelector('input[type=text]').value.trim() != '']"
-          style="display: flex; flex-grow: 1"
+          hx-swap="none"
+          hx-on="htmx:afterSwap:this.elements['message'].value = '';"
         >
-          {% include "input.html" %}
+          <input id="messageInput" type="text" name="message" placeholder="Type a message..." />
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              document.getElementById("messageInput").focus();
+            });
+          </script>
+          <button type="submit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0
+		24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-corner-down-left"
+            >
+              <polyline points="9 10 4 15 9 20"></polyline>
+              <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+            </svg>
+          </button>
         </form>
       </div>
       <ul
@@ -183,7 +212,6 @@
         sse-connect="/messages"
         sse-swap="message"
       >
-        {% include "messages.html" %}
       </ul>
     </div>
   </body>
