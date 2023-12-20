@@ -13,7 +13,6 @@ meta_out() {
 META="$(cat <&3)"
 P="$(jq -r .path <<<"$META")"
 METHOD="$(jq -r .method <<<"$META")"
-CLIENT="$(jq -r '"\(.remote_ip):\(.remote_port)"' <<<"$META")"
 
 if [[ "$METHOD" == "GET" && "$P" == "/" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
@@ -21,9 +20,16 @@ if [[ "$METHOD" == "GET" && "$P" == "/" ]]; then
     exit
 fi
 
+if [[ "$METHOD" == "GET" && "$P" == "/messages" ]]; then
+    meta_out headers="$(jo "content-type"="text/event-stream")"
+    watchexec -w ./scratch/messages.html -- "cat scratch/messages.html | sed 's/^/data: /g'; echo"
+    exit
+fi
+
 if [[ "$METHOD" == "POST" && "$P" == "/message" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
     jq -c --argjson meta "$META" '{
+        stamp: $meta.stamp,
         ip: $meta.remote_ip,
         port: $meta.remote_port,
         message,
