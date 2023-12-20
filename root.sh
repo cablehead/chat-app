@@ -16,13 +16,17 @@ METHOD="$(jq -r .method <<<"$META")"
 
 if [[ "$METHOD" == "GET" && "$P" == "/" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
-    jo request="$META" | tera --include-path ./scratch -i --template html/index.html --stdin
+    jo request="$META" | tera -i --template html/index.html --stdin
     exit
 fi
 
 if [[ "$METHOD" == "GET" && "$P" == "/messages" ]]; then
     meta_out headers="$(jo "content-type"="text/event-stream")"
-    exec watchexec --postpone -w ./scratch/messages.html -- "cat scratch/messages.html | sed 's/^/data: /g'; echo"
+    exec tail -F $STORE/messages.json | xcat -- bash -c "
+        jq '{message: .}' |
+        tera -t html/message.html --stdin |
+        sed 's/^/data: /g'; echo
+    "
 fi
 
 if [[ "$METHOD" == "POST" && "$P" == "/message" ]]; then
