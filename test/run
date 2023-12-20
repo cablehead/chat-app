@@ -11,4 +11,4 @@ cat /dev/null | ../root.sh 3< get.json 4>&1
 jo message=hai | ../root.sh 3< post.json 4<&1
 
 ls -lh $STORE
-cat $STORE/messages.html
+cat $STORE/messages.json

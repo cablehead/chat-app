@@ -1,0 +1,3 @@
+{% for message in messages %}
+<li><mark>{{ message.ip }}:{{message.port}}</mark>{{ message.message }}</li>
+{%- endfor -%}
