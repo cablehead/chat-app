@@ -48,6 +48,7 @@
         color: var(--color-fg-3);
         max-width: 780px;
         margin: 0 auto;
+        padding: 1ch;
         font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono",
           "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono",
           "Courier New", monospace;
@@ -144,16 +145,17 @@
   </head>
 
   <body style="max-width: 780px; margin: 0 auto">
-    <div style="display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: column;">
       <div
         style="
           display: flex;
+          flex-wrap: wrap-reverse;
           justify-content: space-between;
-          align-items: flex-start;
-          margin-top: 3lh;
+          align-content: flex-start;
+          margin-top: 1lh;
         "
       >
-        <h1>the-chat-app</h1>
+        <h1 style="white-space: nowrap;">the-chat-app</h1>
         <pre
           class="hoverable"
           style="
