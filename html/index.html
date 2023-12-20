@@ -35,6 +35,12 @@
         color: var(--accent-color);
       }
 
+      mark {
+        width: 20ch;
+        color: var(--alt-text-color);
+        background-color: inherit;
+      }
+
       input[type="text"] {
         font-size: 1em;
         width: 100%;
@@ -56,17 +62,17 @@
         background-color: var(--secondary-background-color);
       }
 
-      .message-row {
+      li {
         display: flex;
         padding: 1ch;
         color: var(--primary-text-color);
       }
 
-      .message-row:nth-child(odd) {
+      li:nth-child(odd) {
         background-color: var(--primary-background-color);
       }
 
-      .message-row:nth-child(even) {
+      li:nth-child(even) {
         background-color: var(--secondary-background-color);
       }
     </style>
@@ -89,9 +95,7 @@
         </form>
       </div>
       <ul style="list-style-type: none; padding: 0; margin: 0">
-        <li class="message-row">tom: morning all!</li>
-        <li class="message-row">sally: i didn't think it would end that way</li>
-        <li class="message-row">rita: and the way she fell down</li>
+        {% include "messages.html" %}
       </ul>
     </div>
   </body>

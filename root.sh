@@ -13,6 +13,7 @@ meta_out() {
 META="$(cat <&3)"
 P="$(jq -r .path <<<"$META")"
 METHOD="$(jq -r .method <<<"$META")"
+CLIENT="$(jq -r '"\(.remote_ip):\(.remote_port)"' <<<"$META")"
 
 if [[ "$METHOD" == "GET" && "$P" == "/" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
@@ -22,7 +23,7 @@ fi
 
 if [[ "$METHOD" == "POST" && "$P" == "/message" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
-    jq -r .message >"$STORE"/messages
+    echo '<li><mark>'"$CLIENT"'</mark>'$(jq -r .message)'</li>' >>"$STORE"/messages.html
     cat html/input.html
     exit
 fi
