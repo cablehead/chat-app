@@ -4,25 +4,90 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat App</title>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+    </style>
+
+    <style>
+      :root {
+        --foreground-color: #d8dee9;
+        --primary-background-color: #2e3440;
+        --secondary-background-color: #3b4252;
+        --accent-color: #88c0d0;
+        --header-footer-color: #4c566a;
+        --primary-text-color: #eceff4;
+        --alt-text-color: #616e88;
+      }
+
+      body {
+        background-color: var(--primary-background-color);
+        color: var(--foreground-color);
+        max-width: 780px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        color: var(--accent-color);
+      }
+
+      input[type="text"] {
+        font-size: 1em;
+        width: 100%;
+        padding: 1ch;
+        border: 1px solid var(--accent-color);
+        background-color: var(--foreground-color);
+        color: var(--primary-background-color);
+      }
+
+      button {
+        background-color: var(--secondary-color);
+        color: var(--foreground-color);
+        padding: 1ch;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: var(--secondary-background-color);
+      }
+
+      .message-row {
+        display: flex;
+        padding: 1ch;
+        color: var(--primary-text-color);
+      }
+
+      .message-row:nth-child(odd) {
+        background-color: var(--primary-background-color);
+      }
+
+      .message-row:nth-child(even) {
+        background-color: var(--secondary-background-color);
+      }
+    </style>
+
     <script src="https://unpkg.com/htmx.org@1.9.9"></script>
-    <link href="https://cdn.skypack.dev/sanitize.css" rel="stylesheet" />
-    <link href="https://unpkg.com/sanitize.css/forms.css" rel="stylesheet" />
-    <link href="https://unpkg.com/sanitize.css/assets.css" rel="stylesheet" />
-    <link href="https://unpkg.com/sanitize.css/typography.css" rel="stylesheet" />
-    <link href="https://unpkg.com/sanitize.css/reduce-motion.css" rel="stylesheet" />
-    <link href="https://unpkg.com/sanitize.css/system-ui.css" rel="stylesheet" />
-    <link href="https://unpkg.com/sanitize.css/ui-monospace.css" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
   </head>
 
   <body style="max-width: 780px; margin: 0 auto">
-    <div style="border: 1px solid black">
-      <div style="margin: 40px 0">
-        <form hx-post="/message">
-					{% include "input.html" %}
+    <div style="display: flex; flex-direction: column">
+      <h1>Chat App</h1>
+      <div style="margin: 40px 0 20px; display: flex">
+        <form hx-post="/message" hx-ext="json-enc" style="display: flex; flex-grow: 1">
+          {% include "input.html" %}
         </form>
-        <div id="ack">OK</div>
       </div>
-      <div>hi</div>
+      <ul style="list-style-type: none; padding: 0; margin: 0">
+        <li class="message-row">tom: morning all!</li>
+        <li class="message-row">sally: i didn't think it would end that way</li>
+        <li class="message-row">rita: and the way she fell down</li>
+      </ul>
     </div>
   </body>
 </html>

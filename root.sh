@@ -22,7 +22,7 @@ fi
 
 if [[ "$METHOD" == "POST" && "$P" == "/message" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
-    cat >"$STORE"/messages
+    jq -r .message >"$STORE"/messages
     cat html/input.html
     exit
 fi
