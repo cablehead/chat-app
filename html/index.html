@@ -29,8 +29,10 @@
         color: var(--foreground-color);
         max-width: 780px;
         margin: 0 auto;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-          "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+        font-size: 0.9em;
+        font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono",
+          "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono",
+          "Courier New", monospace;
       }
 
       h1 {
@@ -38,7 +40,6 @@
       }
 
       mark {
-        width: 20ch;
         color: var(--alt-text-color);
         background-color: inherit;
       }
@@ -53,8 +54,8 @@
       }
 
       button {
-        background-color: var(--secondary-color);
-        color: var(--foreground-color);
+        background-color: var(--accent-color);
+        color: var(--primary-background-color);
         padding: 1ch 5ch;
         border: none;
         cursor: pointer;
@@ -62,11 +63,15 @@
 
       button:hover {
         background-color: var(--secondary-background-color);
+        color: var(--primary-text-color);
       }
 
       li {
         display: flex;
+        justify-content: space-between;
+				align-items: flex-end;
         padding: 1ch;
+        gap: 2ch;
         color: var(--primary-text-color);
       }
 
@@ -82,6 +87,25 @@
     <script src="https://unpkg.com/htmx.org@1.9.9"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
+
+    <script type="module">
+      import * as scru128 from "https://unpkg.com/scru128@3.0.4";
+
+      htmx.defineExtension("my-scru128", {
+        onEvent: function (name, e) {
+          if (name != "htmx:afterProcessNode") return;
+          const stamp = e.target.textContent;
+          const id = scru128.Scru128Id.fromString(stamp);
+          const date = new Date(id.timestamp);
+          const options = {
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+          };
+          e.target.textContent = date.toLocaleTimeString(undefined, options);
+        },
+      });
+    </script>
   </head>
 
   <body style="max-width: 780px; margin: 0 auto">
