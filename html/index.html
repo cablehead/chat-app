@@ -79,7 +79,12 @@
     <div style="display: flex; flex-direction: column">
       <h1>Chat App</h1>
       <div style="margin: 40px 0 20px; display: flex">
-        <form hx-post="/message" hx-ext="json-enc" style="display: flex; flex-grow: 1">
+        <form
+          hx-post="/message"
+          hx-ext="json-enc"
+          hx-trigger="submit[this.querySelector('input[type=text]').value.trim() != '']"
+          style="display: flex; flex-grow: 1"
+        >
           {% include "input.html" %}
         </form>
       </div>
