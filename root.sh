@@ -22,8 +22,8 @@ fi
 
 if [[ "$METHOD" == "GET" && "$P" == "/messages" ]]; then
     meta_out headers="$(jo "content-type"="text/event-stream")"
-    exec tail -F $STORE/messages.json | xcat -- bash -c "
-        sed 's/^/data: /g'; echo"
+    exec tail -F $STORE/messages.json |
+        xcat -- bash -c "sed 's/^/data: /g'; echo"
 fi
 
 if [[ "$METHOD" == "POST" && "$P" == "/message" ]]; then

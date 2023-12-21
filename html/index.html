@@ -159,8 +159,8 @@
           onclick="window.open('https://github.com/cablehead/the-chat-app/blob/main/root.sh#L23-L30', '_blank')"
         ><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[[ </span><span style="color:#c0c5ce;">"$</span><span style="color:#bf616a;">METHOD</span><span style="color:#c0c5ce;">" == "</span><span style="color:#a3be8c;">GET</span><span style="color:#c0c5ce;">" &amp;&amp; "$</span><span style="color:#bf616a;">P</span><span style="color:#c0c5ce;">" == "</span><span style="color:#a3be8c;">/messages</span><span style="color:#c0c5ce;">" </span><span style="color:#96b5b4;">]]</span><span style="color:#c0c5ce;">; </span><span style="color:#b48ead;">then
 </span><span style="color:#c0c5ce;">    </span><span style="color:#8fa1b3;">meta_out</span><span style="color:#c0c5ce;"> headers="$</span><span style="color:#a3be8c;">(</span><span style="color:#8fa1b3;">jo </span><span style="color:#c0c5ce;">"</span><span style="color:#a3be8c;">content-type</span><span style="color:#c0c5ce;">"</span><span style="color:#a3be8c;">=</span><span style="color:#c0c5ce;">"</span><span style="color:#a3be8c;">text/event-stream</span><span style="color:#c0c5ce;">"</span><span style="color:#a3be8c;">)</span><span style="color:#c0c5ce;">"
-</span><span style="color:#c0c5ce;">    </span><span style="color:#96b5b4;">exec</span><span style="color:#c0c5ce;"> tail -F $</span><span style="color:#bf616a;">STORE</span><span style="color:#c0c5ce;">/messages.json | </span><span style="color:#8fa1b3;">xcat</span><span style="color:#c0c5ce;"> -- bash -c "
-</span><span style="color:#a3be8c;">        sed 's/^/data: /g'; echo"
+</span><span style="color:#c0c5ce;">    </span><span style="color:#96b5b4;">exec</span><span style="color:#c0c5ce;"> tail -F $</span><span style="color:#bf616a;">STORE</span><span style="color:#c0c5ce;">/messages.json |
+</span><span style="color:#8fa1b3;">        xcat</span><span style="color:#c0c5ce;"> -- bash -c "</span><span style="color:#a3be8c;">sed 's/^/data: /g'; echo"
 </span><span style="color:#b48ead;">fi
 </span></pre>
       </div>
