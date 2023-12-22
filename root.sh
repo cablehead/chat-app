@@ -2,6 +2,12 @@
 
 set -eu
 
+STORE="$1"
+
+ROUTE_PATH=${2:-"/"}
+# we export to make it available in the tera template
+export ROUTE_PATH=${ROUTE_PATH%/}
+
 BASE="$(dirname "$0")"
 cd "$BASE"
 
@@ -11,22 +17,25 @@ meta_out() {
 }
 
 META="$(cat <&3)"
-P="$(jq -r .path <<<"$META")"
+
 METHOD="$(jq -r .method <<<"$META")"
 
-if [[ "$METHOD" == "GET" && "$P" == "/" ]]; then
+P="$(jq -r .path <<<"$META")"
+P=${P%/}
+
+if [[ "$METHOD" == "GET" && "$P" == "${ROUTE_PATH}" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
-    jo request="$META" | tera -i --template html/index.html --stdin
+    jo request="$META" | tera --env --env-key ENV -i --template html/index.html --stdin
     exit
 fi
 
-if [[ "$METHOD" == "GET" && "$P" == "/messages" ]]; then
+if [[ "$METHOD" == "GET" && "$P" == "${ROUTE_PATH}/messages" ]]; then
     meta_out headers="$(jo "content-type"="text/event-stream")"
     exec tail -F $STORE/messages.json |
         xcat -- bash -c "sed 's/^/data: /g'; echo"
 fi
 
-if [[ "$METHOD" == "POST" && "$P" == "/message" ]]; then
+if [[ "$METHOD" == "POST" && "$P" == "${ROUTE_PATH}/message" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
     jq -c --argjson meta "$META" '{
         stamp: $meta.stamp,

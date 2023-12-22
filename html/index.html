@@ -168,7 +168,7 @@
       <div style="margin: 40px 0px; display: flex">
         <form
           style="display: flex; flex-grow: 1"
-          hx-post="/message"
+          hx-post="{{ ENV.ROUTE_PATH }}/message"
           hx-ext="json-enc"
           hx-trigger="submit[this.querySelector('input[type=text]').value.trim() != '']"
           hx-swap="none"
@@ -205,14 +205,14 @@
           style="list-style-type: none; padding: 0; margin: 0"
           hx-ext="sse"
           hx-swap="afterbegin"
-          sse-connect="/messages"
+          sse-connect="{{ ENV.ROUTE_PATH }}/messages"
           sse-swap="message"
           handlebars-template="foo"
         >
           {% raw %}
           <template id="foo">
             <li>
-              <small style="text-align: right; width: 10ch; white-space: nowrap"
+              <small style="text-align: right; min-width: 11ch; white-space: nowrap"
                 ><mark>{{ scru128-to-formatted-time stamp }}</mark></small
               >
               <span style="flex-grow: 1; text-align: left">{{ message }}</span>
