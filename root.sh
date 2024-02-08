@@ -11,6 +11,8 @@ export ROUTE_PATH=${ROUTE_PATH%/}
 BASE="$(dirname "$0")"
 cd "$BASE"
 
+mkdir -p "$STORE"
+
 meta_out() {
     jo "$@" >&4
     exec 4>&-
