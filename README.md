@@ -16,7 +16,7 @@ I know! GL 😆
 - `tail`
 - [`jo`](https://github.com/jpmens/jo)
 - [`jq`](https://jqlang.github.io/jq/)
-- `tera`
+- [`tera`](https://github.com/chevdor/tera-cli)
 - [`xcat`](https://github.com/cablehead/xcat)
 - [`http-sh`](https://github.com/cablehead/http-sh)
 
