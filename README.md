@@ -1,4 +1,7 @@
-`chat-app` is an experiment in how it would look to build a service exclusively with [small tools](https://gist.github.com/cablehead/efbe67fb90b8dde21a7c885f91f3f75d)
+`chat-app` is an experiment in how it would look to build a service exclusively
+with [small
+tools](https://gist.github.com/cablehead/efbe67fb90b8dde21a7c885f91f3f75d),
+when the unit of tool is a cli command, and bash is the coordination language.
 
 ## Live example
 
