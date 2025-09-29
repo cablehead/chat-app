@@ -37,6 +37,11 @@ if [[ "$METHOD" == "GET" && "$P" == "${ROUTE_PATH}/messages" ]]; then
         xcat -- bash -c "sed 's/^/data: /g'; echo"
 fi
 
+if [[ "$METHOD" == "GET" && "$P" == "${ROUTE_PATH}/screenshot.png" ]]; then
+    meta_out headers="$(jo "content-type"="image/png")"
+    exec cat docs/screenshot.png
+fi
+
 if [[ "$METHOD" == "POST" && "$P" == "${ROUTE_PATH}/message" ]]; then
     meta_out headers="$(jo "content-type"="text/html")"
     jq -c --argjson meta "$META" '{
