@@ -33,7 +33,7 @@ fi
 
 if [[ "$METHOD" == "GET" && "$P" == "${ROUTE_PATH}/messages" ]]; then
     meta_out headers="$(jo "content-type"="text/event-stream")"
-    exec tail -F $STORE/messages.json |
+    exec tail --sleep-interval 0.1 -F $STORE/messages.json |
         xcat -- bash -c "sed 's/^/data: /g'; echo"
 fi
 
