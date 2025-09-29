@@ -5,7 +5,7 @@ when the unit of tool is a cli command, and bash is the coordination language.
 
 ## Live example
 
-https://ndyg.cross.stream/projects/chat-app
+https://chat-app.cross.stream
 
 ## Requirements
 
